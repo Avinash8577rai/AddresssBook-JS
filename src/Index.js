@@ -1,13 +1,23 @@
-const Contact = require('./models/Contact');
 const AddressBook = require('./services/AddressBook');
-
+const Contact = require('./models/Contact');
 
 const addressBook = new AddressBook();
 
+try {
+    const contact1 = new Contact(
+        "Avinash", "Kumar", "Bhopal", "India", "In", "100001", "9696439931", "avinashkumarrai8577@gmail.com"
+    );
+    console.log(addressBook.addContact(contact1));
+    console.log(addressBook.getAllContacts());
+} catch (error) {
+    console.error("Error:", error.message);
+}
 
-const contact1 = new Contact("John", "Doe", "123 Street", "New York", "NY", "10001", "1234567890", "john.doe@example.com");
-
-addressBook.addContact(contact1);
-
-
-addressBook.displayContacts();
+try {
+    const invalidContact = new Contact(
+        "an", "son", "abc", "In", "I", "100A01", "12345", "invalid-email"
+    );
+    console.log(addressBook.addContact(invalidContact));
+} catch (error) {
+    console.error("Error:", error.message);
+}

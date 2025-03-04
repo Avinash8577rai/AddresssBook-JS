@@ -6,13 +6,15 @@ class AddressBook {
     }
 
     addContact(contact) {
+        if (this.contacts.some(c => c.phone === contact.phone || c.email === contact.email)) {
+            throw new Error("Duplicate Contact! Phone number or Email already exists.");
+        }
         this.contacts.push(contact);
-        console.log("Contact added successfully!");
+        return "Contact added successfully!";
     }
 
-    displayContacts() {
-        console.log("\nAddress Book Contacts:");
-        this.contacts.forEach((contact, index) => console.log(`${index + 1}. ${contact.toString()}`));
+    getAllContacts() {
+        return this.contacts;
     }
 }
 

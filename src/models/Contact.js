@@ -1,3 +1,4 @@
+
 class Contact {
     constructor(firstName, lastName, address, city, state, zip, phone, email) {
         this.validateName(firstName, "First Name");
@@ -20,8 +21,8 @@ class Contact {
     }
 
     validateName(name, fieldName) {
-        const namePattern = /^[A-Z][a-zA-Z]{2,}$/; // Starts with capital, min 3 chars
-        if (!namePattern.test(name)) {
+        const nameRegex = /^[A-Z][a-zA-Z]{2,}$/;
+        if (!nameRegex.test(name)) {
             throw new Error(`${fieldName} must start with a capital letter and have at least 3 characters.`);
         }
     }
@@ -33,26 +34,29 @@ class Contact {
     }
 
     validateZip(zip) {
-        const zipPattern = /^\d{6}$/; // 6-digit Zip Code
-        if (!zipPattern.test(zip)) {
-            throw new Error("Zip code must be a 6-digit number.");
+        const zipRegex = /^[1-9][0-9]{5}$/;
+        if (!zipRegex.test(zip)) {
+            throw new Error("Invalid Zip Code. It must be a 6-digit number.");
         }
     }
 
     validatePhone(phone) {
-        const phonePattern = /^[6-9]\d{9}$/; // Indian 10-digit format starting with 6-9
-        if (!phonePattern.test(phone)) {
-            throw new Error("Phone number must be a valid 10-digit number starting with 6-9.");
+        const phoneRegex = /^[6-9][0-9]{9}$/; 
+        if (!phoneRegex.test(phone)) {
+            throw new Error("Invalid Phone Number. It must be a 10-digit number starting with 6-9.");
         }
     }
 
     validateEmail(email) {
-        const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-        if (!emailPattern.test(email)) {
-            throw new Error("Invalid email format.");
+        const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+        if (!emailRegex.test(email)) {
+            throw new Error("Invalid Email Address.");
         }
     }
-
+    toString() {
+        return `${this.firstName} ${this.lastName}, ${this.address}, ${this.city}, ${this.state} - ${this.zip}, Phone: ${this.phone}, Email: ${this.email}`;
+    }
+    
 }
 
 module.exports = Contact;
